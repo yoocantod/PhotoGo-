@@ -1,6 +1,22 @@
 body {
   padding-top: 70px;
   background: url("homepage.jpeg") center/cover no-repeat;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 .custom-navbar {
@@ -17,7 +33,7 @@ body {
 
 /* ukuran strip */
 .preview-wrapper {
-  width: 260px;
+  width: min(260px, 90vw);
 }
 
 .frame {
@@ -26,9 +42,11 @@ body {
 }
 
 /* contoh frame */
-.frame-1 { background: linear-gradient(135deg, #ff9a9e, #fad0c4); }
-.frame-2 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
-.frame-3 { background: linear-gradient(135deg, #43cea2, #185a9d); }
+.frame-1 { background-image: url('frame1.jpeg'); background-size: cover; background-position: center; }
+.frame-2 { background-image: url('frame2.jpeg'); background-size: cover; background-position: center; }
+.frame-3 { background-image: url('frame3.jpeg'); background-size: cover; background-position: center; }
+.frame-4 { background-image: url('frame4.jpeg'); background-size: cover; background-position: center; }
+.frame-5 { background-image: url('frame5.jpeg'); background-size: cover; background-position: center; }
 
 /* grid 2x3 */
 .grid {
@@ -39,8 +57,8 @@ body {
 
 .grid img {
   width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: 8px;
 }
 
@@ -53,8 +71,15 @@ body {
   padding: 6px 14px;
   border: none;
   border-radius: 20px;
-  background: #333;
-  color: white;
+  background: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.frame-options button:hover {
+  background: rgba(255, 255, 255, 1);
 }
 
 .download-btn {
