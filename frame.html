@@ -26,9 +26,11 @@
   </div>
 
   <div class="frame-options">
-    <button onclick="setFrame(1)">Pink</button>
-    <button onclick="setFrame(2)">Purple</button>
-    <button onclick="setFrame(3)">Green</button>
+    <button onclick="setFrame(1)">Frame 1</button>
+    <button onclick="setFrame(2)">Frame 2</button>
+    <button onclick="setFrame(3)">Frame 3</button>
+    <button onclick="setFrame(4)">Frame 4</button>
+    <button onclick="setFrame(5)">Frame 5</button>
   </div>
 
   <button id="downloadBtn" class="download-btn">
@@ -40,5 +42,16 @@
 
 <canvas id="exportCanvas" hidden></canvas>
 <script src="frame.js"></script>
+<script>
+    document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 500);
+        });
+    });
+</script>
 </body>
 </html>
