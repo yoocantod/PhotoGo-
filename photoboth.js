@@ -1,3 +1,4 @@
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -44,6 +45,7 @@ function renderPhotos() {
     if (photos[i]) {
       const img = document.createElement("img");
       img.src = photos[i];
+      img.classList.add("fade-in");
       slot.appendChild(img);
     }
   });
@@ -53,9 +55,15 @@ function renderPhotos() {
 slots.forEach((slot, index) => {
   slot.addEventListener("click", () => {
     if (photos[index]) {
-      photos.splice(index, 1);
-      localStorage.setItem("photos", JSON.stringify(photos));
-      renderPhotos();
+      const img = slot.querySelector("img");
+      if (img) {
+        img.classList.add("fade-out");
+        setTimeout(() => {
+          photos.splice(index, 1);
+          localStorage.setItem("photos", JSON.stringify(photos));
+          renderPhotos();
+        }, 500); // 0.5s animation duration
+      }
     }
   });
 });
