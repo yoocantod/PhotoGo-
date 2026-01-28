@@ -76,6 +76,24 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .frame-options {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .frame-options button {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .download-btn {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
 }
 
 .frame-options button:hover {
