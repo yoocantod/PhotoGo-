@@ -1,9 +1,11 @@
 
+
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const captureBtn = document.getElementById("captureBtn");
 const finishBtn = document.getElementById("finishBtn");
+const countdownEl = document.getElementById("countdown");
 const slots = document.querySelectorAll(".slot");
 
 let photos = JSON.parse(localStorage.getItem("photos")) || [];
@@ -25,18 +27,35 @@ captureBtn.addEventListener("click", () => {
   if (photos.length >= 6) return;
   if (video.videoWidth === 0) return alert("Kamera belum siap");
 
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
+  captureBtn.disabled = true;
+  let count = 3;
+  countdownEl.style.display = "block";
+  countdownEl.textContent = count;
 
-  ctx.save();
-  ctx.scale(-1, 1);
-  ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
-  ctx.restore();
+  const countdownInterval = setInterval(() => {
+    count--;
+    if (count > 0) {
+      countdownEl.textContent = count;
+    } else {
+      clearInterval(countdownInterval);
+      countdownEl.style.display = "none";
 
-  const imageData = canvas.toDataURL("image/png");
-  photos.push(imageData);
-  localStorage.setItem("photos", JSON.stringify(photos));
-  renderPhotos();
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      ctx.save();
+      ctx.scale(-1, 1);
+      ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
+      ctx.restore();
+
+      const imageData = canvas.toDataURL("image/png");
+      photos.push(imageData);
+      localStorage.setItem("photos", JSON.stringify(photos));
+      renderPhotos();
+
+      captureBtn.disabled = false;
+    }
+  }, 1000);
 });
 // RENDER KE GRID
 function renderPhotos() {
